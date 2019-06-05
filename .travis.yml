@@ -1,0 +1,22 @@
+# repo branches
+
+branches:
+  only:
+  - master
+
+# job environment
+
+sudo: false
+
+language: rust
+
+rust:
+  - stable
+  - nightly
+  - beta
+
+# job phases
+
+script:
+  - cargo build
+  - cargo test --lib
