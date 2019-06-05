@@ -302,6 +302,8 @@ pub mod utils {
     use regex::{Regex, RegexSet};
 
     lazy_static! {
+        /// These patterns represent a MAC address in plain,
+        /// hyphen, colon, or dot notation.
         pub static ref NOTATIONS: RegexSet = RegexSet::new(&[
             "^[0-9A-Fa-f]{12}$",
             "^([0-9A-Fa-f]{2}[-]{1}){5}[0-9A-Fa-f]{2}$",
@@ -309,17 +311,17 @@ pub mod utils {
             "^([0-9A-Fa-f]{4}[.]{1}){2}[0-9A-Fa-f]{4}$"
         ])
         .unwrap();
-    }
 
-    lazy_static! {
+        /// This pattern represents any character that is not a
+        /// hexadecimal digit.
         pub static ref NOT_DIGITS: Regex = Regex::new("[^0-9A-Fa-f]").unwrap();
-    }
 
-    lazy_static! {
+        /// This pattern represents a series of two hexadecimal
+        /// digits.
         pub static ref TWO_DIGITS: Regex = Regex::new("[0-9a-f]{2}").unwrap();
-    }
 
-    lazy_static! {
+        /// This pattern represents a series of four hexadecimal
+        /// digits.
         pub static ref FOUR_DIGITS: Regex = Regex::new("[0-9a-f]{4}").unwrap();
     }
 
