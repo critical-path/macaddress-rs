@@ -144,7 +144,7 @@ println!("{}", &dot);
 
 ## Testing macaddress
 
-To conduct testing, run the following commands from your shell.
+To conduct testing, run the following command from your shell.
 
 ```console
 [user@host macaddress-rs]$ cargo test --lib
@@ -153,7 +153,7 @@ To conduct testing, run the following commands from your shell.
 
 ## Building the documentation
 
-To build the documentation for macaddress, run the following commands from your shell.
+To build the documentation for macaddress, run the following command from your shell.
 
 ```console
 [user@host macaddress-rs]$ cargo doc
