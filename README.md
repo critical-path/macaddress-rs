@@ -112,6 +112,13 @@ let binary = mac.to_binary_representation();
 println!("{}", &binary);
 ```
 
+To view the decimal equivalent of the MAC address, call the `to_decimal_representation` method.
+
+```rust
+let decimal = mac.to_decimal_representation();
+println!("{}", &decimal);
+```
+
 To return the MAC address's two "fragments," call the `to_fragments` method.  For an EUI, this means the 24-bit OUI as the first fragment and the remaining interface-specific bits as the second fragment.  For an ELI, this means the 24-bit CID as the first fragment and the remaining interface-specific bits as the second fragment.
 
 ```rust
