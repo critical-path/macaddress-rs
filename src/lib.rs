@@ -126,6 +126,12 @@ pub mod macaddress {
             binary.join("")
         }
 
+        /// Returns the decimal representation of the MAC address.
+        pub fn to_decimal_representation(&self) -> usize {
+            let binary = self.to_binary_representation();
+            usize::from_str_radix(&binary, 2).unwrap()   
+        }
+
         /// Returns the MAC address in plain notation
         /// (for example, `a0b1c2d3e4f5`).
         pub fn to_plain_notation(&self) -> String {
@@ -341,6 +347,7 @@ mod tests {
             (
                 "a0b1c2d3e4f5", // Plain notation (lowercase)
                 "101000001011000111000010110100111110010011110101",
+                176685338322165,
                 "a0b1c2d3e4f5",
                 "a0-b1-c2-d3-e4-f5",
                 "a0:b1:c2:d3:e4:f5",
@@ -358,6 +365,7 @@ mod tests {
             (
                 "A0B1C2D3E4F5", // Plain notation (uppercase)
                 "101000001011000111000010110100111110010011110101",
+                176685338322165,
                 "a0b1c2d3e4f5",
                 "a0-b1-c2-d3-e4-f5",
                 "a0:b1:c2:d3:e4:f5",
@@ -375,6 +383,7 @@ mod tests {
             (
                 "a0-b1-c2-d3-e4-f5", // Hyphen notation (lowercase)
                 "101000001011000111000010110100111110010011110101",
+                176685338322165,
                 "a0b1c2d3e4f5",
                 "a0-b1-c2-d3-e4-f5",
                 "a0:b1:c2:d3:e4:f5",
@@ -392,6 +401,7 @@ mod tests {
             (
                 "A0-B1-C2-D3-E4-F5", // Hyphen notation (uppercase)
                 "101000001011000111000010110100111110010011110101",
+                176685338322165,
                 "a0b1c2d3e4f5",
                 "a0-b1-c2-d3-e4-f5",
                 "a0:b1:c2:d3:e4:f5",
@@ -409,6 +419,7 @@ mod tests {
             (
                 "a0:b1:c2:d3:e4:f5", // Colon notation (lowercase)
                 "101000001011000111000010110100111110010011110101",
+                176685338322165,
                 "a0b1c2d3e4f5",
                 "a0-b1-c2-d3-e4-f5",
                 "a0:b1:c2:d3:e4:f5",
@@ -426,6 +437,7 @@ mod tests {
             (
                 "A0:B1:C2:D3:E4:F5", // Colon notation (uppercase)
                 "101000001011000111000010110100111110010011110101",
+                176685338322165,
                 "a0b1c2d3e4f5",
                 "a0-b1-c2-d3-e4-f5",
                 "a0:b1:c2:d3:e4:f5",
@@ -443,6 +455,7 @@ mod tests {
             (
                 "a0b1.c2d3.e4f5", // Dot notation (lowercase)
                 "101000001011000111000010110100111110010011110101",
+                176685338322165,
                 "a0b1c2d3e4f5",
                 "a0-b1-c2-d3-e4-f5",
                 "a0:b1:c2:d3:e4:f5",
@@ -460,6 +473,7 @@ mod tests {
             (
                 "A0B1.C2D3.E4F5", // Dot notation (uppercase)
                 "101000001011000111000010110100111110010011110101",
+                176685338322165,
                 "a0b1c2d3e4f5",
                 "a0-b1-c2-d3-e4-f5",
                 "a0:b1:c2:d3:e4:f5",
@@ -481,21 +495,22 @@ mod tests {
             let mac = MediaAccessControlAddress::new(&digits).unwrap();
 
             assert_eq!(mac.to_binary_representation(), element.1);
-            assert_eq!(mac.to_plain_notation(), element.2);
-            assert_eq!(mac.to_hyphen_notation(), element.3);
-            assert_eq!(mac.to_colon_notation(), element.4);
-            assert_eq!(mac.to_dot_notation(), element.5);
+            assert_eq!(mac.to_decimal_representation(), element.2);
+            assert_eq!(mac.to_plain_notation(), element.3);
+            assert_eq!(mac.to_hyphen_notation(), element.4);
+            assert_eq!(mac.to_colon_notation(), element.5);
+            assert_eq!(mac.to_dot_notation(), element.6);
 
-            assert_eq!(mac.to_fragments(), element.6);
-            assert_eq!(mac.kind(), element.7);
-            assert_eq!(mac.has_oui(), element.8);
-            assert_eq!(mac.has_cid(), element.9);
+            assert_eq!(mac.to_fragments(), element.7);
+            assert_eq!(mac.kind(), element.8);
+            assert_eq!(mac.has_oui(), element.9);
+            assert_eq!(mac.has_cid(), element.10);
 
-            assert_eq!(mac.is_broadcast(), element.10);
-            assert_eq!(mac.is_multicast(), element.11);
-            assert_eq!(mac.is_unicast(), element.12);
-            assert_eq!(mac.is_uaa(), element.13);
-            assert_eq!(mac.is_laa(), element.14);
+            assert_eq!(mac.is_broadcast(), element.11);
+            assert_eq!(mac.is_multicast(), element.12);
+            assert_eq!(mac.is_unicast(), element.13);
+            assert_eq!(mac.is_uaa(), element.14);
+            assert_eq!(mac.is_laa(), element.15);
         }
     }
 
@@ -505,6 +520,7 @@ mod tests {
         let address = (
             "0a1b2c3d4e5f",
             "000010100001101100101100001111010100111001011111",
+            11111822610015,
             "0a1b2c3d4e5f",
             "0a-1b-2c-3d-4e-5f",
             "0a:1b:2c:3d:4e:5f",
@@ -524,21 +540,22 @@ mod tests {
         let mac = MediaAccessControlAddress::new(&digits).unwrap();
 
         assert_eq!(mac.to_binary_representation(), address.1);
-        assert_eq!(mac.to_plain_notation(), address.2);
-        assert_eq!(mac.to_hyphen_notation(), address.3);
-        assert_eq!(mac.to_colon_notation(), address.4);
-        assert_eq!(mac.to_dot_notation(), address.5);
+        assert_eq!(mac.to_decimal_representation(), address.2);
+        assert_eq!(mac.to_plain_notation(), address.3);
+        assert_eq!(mac.to_hyphen_notation(), address.4);
+        assert_eq!(mac.to_colon_notation(), address.5);
+        assert_eq!(mac.to_dot_notation(), address.6);
 
-        assert_eq!(mac.to_fragments(), address.6);
-        assert_eq!(mac.kind(), address.7);
-        assert_eq!(mac.has_oui(), address.8);
-        assert_eq!(mac.has_cid(), address.9);
+        assert_eq!(mac.to_fragments(), address.7);
+        assert_eq!(mac.kind(), address.8);
+        assert_eq!(mac.has_oui(), address.9);
+        assert_eq!(mac.has_cid(), address.10);
 
-        assert_eq!(mac.is_broadcast(), address.10);
-        assert_eq!(mac.is_multicast(), address.11);
-        assert_eq!(mac.is_unicast(), address.12);
-        assert_eq!(mac.is_uaa(), address.13);
-        assert_eq!(mac.is_laa(), address.14);
+        assert_eq!(mac.is_broadcast(), address.11);
+        assert_eq!(mac.is_multicast(), address.12);
+        assert_eq!(mac.is_unicast(), address.13);
+        assert_eq!(mac.is_uaa(), address.14);
+        assert_eq!(mac.is_laa(), address.15);
     }
 
     #[test]
@@ -546,6 +563,7 @@ mod tests {
         let address = (
             "ffffffffffff",
             "111111111111111111111111111111111111111111111111",
+            281474976710655,
             "ffffffffffff",
             "ff-ff-ff-ff-ff-ff",
             "ff:ff:ff:ff:ff:ff",
@@ -565,24 +583,25 @@ mod tests {
         let mac = MediaAccessControlAddress::new(&digits).unwrap();
 
         assert_eq!(mac.to_binary_representation(), address.1);
-        assert_eq!(mac.to_plain_notation(), address.2);
-        assert_eq!(mac.to_hyphen_notation(), address.3);
-        assert_eq!(mac.to_colon_notation(), address.4);
-        assert_eq!(mac.to_dot_notation(), address.5);
+        assert_eq!(mac.to_decimal_representation(), address.2);
+        assert_eq!(mac.to_plain_notation(), address.3);
+        assert_eq!(mac.to_hyphen_notation(), address.4);
+        assert_eq!(mac.to_colon_notation(), address.5);
+        assert_eq!(mac.to_dot_notation(), address.6);
 
         // These tests make little sense in the context
         // of a broadcast address, but we run them for the
         // sake of completeness.
-        assert_eq!(mac.to_fragments(), address.6);
-        assert_eq!(mac.kind(), address.7);
-        assert_eq!(mac.has_oui(), address.8);
-        assert_eq!(mac.has_cid(), address.9);
+        assert_eq!(mac.to_fragments(), address.7);
+        assert_eq!(mac.kind(), address.8);
+        assert_eq!(mac.has_oui(), address.9);
+        assert_eq!(mac.has_cid(), address.10);
 
-        assert_eq!(mac.is_broadcast(), address.10);
-        assert_eq!(mac.is_multicast(), address.11);
-        assert_eq!(mac.is_unicast(), address.12);
-        assert_eq!(mac.is_uaa(), address.13);
-        assert_eq!(mac.is_laa(), address.14);
+        assert_eq!(mac.is_broadcast(), address.11);
+        assert_eq!(mac.is_multicast(), address.12);
+        assert_eq!(mac.is_unicast(), address.13);
+        assert_eq!(mac.is_uaa(), address.14);
+        assert_eq!(mac.is_laa(), address.15);
     }
 
     #[test]
@@ -590,6 +609,7 @@ mod tests {
         let address = (
             "0180c2000000", // Link-Layer Discovery Protocol
             "000000011000000011000010000000000000000000000000",
+            1652522221568,
             "0180c2000000",
             "01-80-c2-00-00-00",
             "01:80:c2:00:00:00",
@@ -609,23 +629,24 @@ mod tests {
         let mac = MediaAccessControlAddress::new(&digits).unwrap();
 
         assert_eq!(mac.to_binary_representation(), address.1);
-        assert_eq!(mac.to_plain_notation(), address.2);
-        assert_eq!(mac.to_hyphen_notation(), address.3);
-        assert_eq!(mac.to_colon_notation(), address.4);
-        assert_eq!(mac.to_dot_notation(), address.5);
+        assert_eq!(mac.to_decimal_representation(), address.2);
+        assert_eq!(mac.to_plain_notation(), address.3);
+        assert_eq!(mac.to_hyphen_notation(), address.4);
+        assert_eq!(mac.to_colon_notation(), address.5);
+        assert_eq!(mac.to_dot_notation(), address.6);
 
         // These tests make little sense in the context
         // of a multicast address, but we run them for the
         // sake of completeness.
-        assert_eq!(mac.to_fragments(), address.6);
-        assert_eq!(mac.kind(), address.7);
-        assert_eq!(mac.has_oui(), address.8);
-        assert_eq!(mac.has_cid(), address.9);
+        assert_eq!(mac.to_fragments(), address.7);
+        assert_eq!(mac.kind(), address.8);
+        assert_eq!(mac.has_oui(), address.9);
+        assert_eq!(mac.has_cid(), address.10);
 
-        assert_eq!(mac.is_broadcast(), address.10);
-        assert_eq!(mac.is_multicast(), address.11);
-        assert_eq!(mac.is_unicast(), address.12);
-        assert_eq!(mac.is_uaa(), address.13);
-        assert_eq!(mac.is_laa(), address.14);
+        assert_eq!(mac.is_broadcast(), address.11);
+        assert_eq!(mac.is_multicast(), address.12);
+        assert_eq!(mac.is_unicast(), address.13);
+        assert_eq!(mac.is_uaa(), address.14);
+        assert_eq!(mac.is_laa(), address.15);
     }
 }
