@@ -147,7 +147,7 @@ println!("{}", &dot);
 To conduct testing, run the following command from your shell.
 
 ```console
-[user@host macaddress-rs]$ cargo test --lib
+[user@host macaddress-rs]$ cargo test
 ```
 
 
