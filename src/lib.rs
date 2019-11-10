@@ -3,105 +3,77 @@
 /// This module contains one struct, `MediaAccessControlAddress`, with
 /// which you interact directly.  Using it is easy!
 ///
-/// Bring the `MediaAccessControlAddress` struct into scope in `main.rs`
-/// `lib.rs`, or some other relevant file.
-///
 /// ```
+/// /// Bring the `MediaAccessControlAddress` struct into scope in `main.rs`
+/// /// `lib.rs`, or some other relevant file.
+///
 /// use macaddress::macaddress::MediaAccessControlAddress;
-/// ```
 ///
-/// Instantiate `MediaAccessControlAddress` by calling the `new`
-/// method and passing in a MAC address in plain, hyphen, colon, or dot 
-/// notation.
+/// /// Instantiate `MediaAccessControlAddress` by calling the `new`
+/// /// method and passing in a MAC address in plain, hyphen, colon, or dot 
+/// /// notation.
 ///
-/// ```
+/// /// Plain notation:
+///
 /// let digits = String::from("a0b1c2d3e4f5");
 /// let mac = MediaAccessControlAddress::new(&digits).unwrap();
-/// ```
 ///
-/// ```
+/// /// Hyphen notation:
+///
 /// let digits = String::from("a0-b1-c2-d3-e4-f5");
 /// let mac = MediaAccessControlAddress::new(&digits).unwrap();
-/// ```
 ///
-/// ```
+/// /// Colon notation:
+///
 /// let digits = String::from("a0:b1:c2:d3:e4:f5");
 /// let mac = MediaAccessControlAddress::new(&digits).unwrap();
-/// ```
 ///
-/// ```
+/// /// Dot notation:
+///
 /// let digits = String::from("a0b1.c2d3.e4f5");
 /// let mac = MediaAccessControlAddress::new(&digits).unwrap();
-/// ```
 ///
-/// Call one or more of `MediaAccessControlAddress`'s methods.
+/// /// Call one or more of `MediaAccessControlAddress`'s methods.
 ///
-/// ```
 /// let broadcast = mac.is_broadcast();
 /// println!("{}", &broadcast);
-/// ```
 ///
-/// ```
 /// let multicast = mac.is_multicast();
 /// println!("{}", &multicast);
-/// ```
 ///
-/// ```
 /// let unicast = mac.is_unicast();
 /// println!("{}", &unicast);
-/// ```
 ///
-/// ```
 /// let uaa = mac.is_uaa();
 /// println!("{}", &uaa);
-/// ```
 ///
-/// ```
 /// let laa = mac.is_laa();
 /// println!("{}", &laa);
-/// ```
 ///
-/// ```
 /// let kind = mac.kind();
 /// println!("{}", &kind);
-/// ```
 ///
-/// ```
 /// let oui = mac.has_oui();
 /// println!("{}", &oui);
-/// ```
 ///
-/// ```
 /// let cid = mac.has_cid();
 /// println!("{}", &cid);
-/// ```
 ///
-/// ```
 /// let binary = mac.to_binary_representation();
 /// println!("{}", &binary);
-/// ```
 ///
-/// ```
 /// let plain = mac.to_plain_notation();
 /// println!("{}", &plain);
-/// ```
 ///
-/// ```
 /// let hyphen = mac.to_hyphen_notation();
 /// println!("{}", &hyphen);
-/// ```
 ///
-/// ```
 /// let colon = mac.to_colon_notation();
 /// println!("{}", &colon);
-/// ```
 ///
-/// ```
 /// let dot = mac.to_dot_notation();
 /// println!("{}", &dot);
-/// ```
 ///
-/// ```
 /// let fragments = mac.to_fragments();
 /// println!("{:?}", &fragments);
 /// ```
