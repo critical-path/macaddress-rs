@@ -62,6 +62,9 @@
 /// let binary = mac.to_binary_representation();
 /// println!("{}", &binary);
 ///
+/// let decimal = mac.to_decimal_representation();
+/// println!("{}", &decimal);
+///
 /// let plain = mac.to_plain_notation();
 /// println!("{}", &plain);
 ///
